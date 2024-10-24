@@ -61,6 +61,8 @@ python3 inference_video.py
 ## Demo
 ![Screenshot 2024-10-22 095745](https://github.com/user-attachments/assets/39e54a72-946a-46cf-9819-e7565277a8fa)
 ![Screenshot 2024-10-22 104630](https://github.com/user-attachments/assets/0ee65695-e14d-4527-a6ff-de2fdebf1105)
+![Screenshot 2024-10-24 210400](https://github.com/user-attachments/assets/73526976-03f7-42f0-b710-7bc93e478ca5)
+
 
 
 ## Authors
