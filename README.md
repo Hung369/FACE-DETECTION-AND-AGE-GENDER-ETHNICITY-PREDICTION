@@ -3,7 +3,7 @@ Given a image or video, model can detect face areas and predict age, gender and 
 
 ## Dependencies
 
-* Python 3.10.11 is needed before installing program.
+* Python 3.10-3.12 is needed before installing program.
 * Any Python IDE can be use for this project, recommend: VSCode and Pycharm
 * OS: Ubuntu Linux or WSL2
 
