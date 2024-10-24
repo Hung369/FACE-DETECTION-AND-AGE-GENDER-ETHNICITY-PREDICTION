@@ -2,6 +2,9 @@ Dataset link download: https://www.kaggle.com/datasets/nipunarora8/age-gender-an
 [age] is an integer from 0 to 116, indicating the age
 [gender] is either 0 (male) or 1 (female)
 [race] is an integer from 0 to 4, denoting White, Black, Asian, Indian, and Others (like Hispanic, Latino, Middle Eastern)
+[pixels] is an array to String of the image pixels
+
+
 
 Learning rate scheduler:
 ReduceLROnPlateau:
