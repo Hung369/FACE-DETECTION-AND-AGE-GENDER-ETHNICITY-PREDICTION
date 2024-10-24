@@ -29,7 +29,7 @@ This dataset includes a CSV of facial images that are labeled on the basis of ag
 
 **race** is an integer from 0 to 4, denoting White, Black, Asian, Indian, and Others (like Hispanic, Latino, Middle Eastern).
 
-Download dataset and move the csv file into dataset folder. For further dataset info. please check the ``` note.txt ``` file in dataset folder.
+Download dataset and move the csv file into dataset folder. For further dataset info, please check the ``` note.txt ``` file in dataset folder.
 
 ## Multi-head model
 Before running inference script, you have to running training script or download a trained model via provided link in ```model_link.txt``` file in **model** folder and store it in checkpoint folder with the path ```model/checkpoint```. For detailed instruction, read the *model_link.txt* file.
@@ -50,12 +50,12 @@ python3 training_model.py
 ```
 * Running model inference on image via this script:
 ```bash
-python3 inference_image.py
+python3 inference_image.py --image_path <your_image_path>
 ```
 
 * Running model inference on video via this script:
 ```bash
-python3 inference_video.py
+python3 inference_video.py --vid_path <your_video_path>
 ```
 
 ## Demo

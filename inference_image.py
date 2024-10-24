@@ -7,6 +7,7 @@ from tensorflow.keras.layers import *
 from keras.applications.vgg16 import VGG16
 from tensorflow.keras.models import Model
 from mtcnn import MTCNN
+import argparse
 
 ETHNICITY = ['white', 'black', 'asian', 'indian', 'other']
 GENDERS = ['male', 'female']
@@ -62,23 +63,32 @@ def build_model(input_shape=(48, 48, 3)):
 
 
 if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(description="Predict age, gender, and ethnicity from an image.")
+    parser.add_argument('--image_path', type=str, help='Path to the image file.', required=True)
+    args = parser.parse_args()
+
     model = build_model()
     model.load_weights("./model/checkpoints/best_model.weights.h5")
     face_detector = MTCNN()
 
     #load test iamge
-    test1 = cv2.imread('./images/test1.jpg')
+    test1 = cv2.imread(args.image_path)
     img_gray = cv2.cvtColor(test1,cv2.COLOR_BGR2GRAY)
     test2 = cv2.cvtColor(img_gray, cv2.COLOR_GRAY2RGB)
     results = face_detector.detect_faces(test2)
     
     for res in results:
-        x1,y1,width,height = res['box']
-        x1,y1 = abs(x1), abs(y1)
-        x2,y2 = x1+width, y1+height
-        # confidence = res['confidence']
+        x1, y1, width, height = res['box']
+        x1, y1 = abs(x1), abs(y1)
+        x2, y2 = x1 + width, y1 + height
 
-        face_reg = cv2.resize(test2[x1:x2, y1:y2], (48, 48))
+        # Ensure coordinates are within the image bounds
+        height_img, width_img = test2.shape[:2]
+        x1, x2 = max(0, x1), min(width_img, x2)
+        y1, y2 = max(0, y1), min(height_img, y2)
+
+        face_reg = cv2.resize(test2[y1:y2, x1:x2], (48, 48))
         face_reg = np.expand_dims(face_reg, axis=0) 
         p = model.predict(face_reg)
 
@@ -88,6 +98,7 @@ if __name__ == "__main__":
 
 
         cv2.rectangle(test1, (x1,y1), (x2,y2), (0,255,0), thickness=2)
+        
         cv2.putText(test1, f'Age: {age_pred} | Gender: {gender_pred} | {ethnic_pred}',(x1,y1),cv2.FONT_ITALIC,0.9,(0,0,255),2)
    
 

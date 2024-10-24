@@ -8,6 +8,7 @@ from tensorflow.keras.layers import *
 from keras.applications.vgg16 import VGG16
 from tensorflow.keras.models import Model
 from mtcnn import MTCNN
+import argparse
 
 ETHNICITY = ['white', 'black', 'asian', 'indian', 'other']
 GENDERS = ['male', 'female']
@@ -70,6 +71,11 @@ def process_frame(frame):
         x1, y1, width, height = res['box']
         x1, y1 = abs(x1), abs(y1)
         x2, y2 = x1 + width, y1 + height
+        
+        height_img, width_img = test_frame.shape[:2]
+        x1, x2 = max(0, x1), min(width_img, x2)
+        y1, y2 = max(0, y1), min(height_img, y2)
+
         face_reg = cv2.resize(test_frame[y1:y2, x1:x2], (48, 48))
         face_reg = np.expand_dims(face_reg, axis=0)
         p = model.predict(face_reg)
@@ -84,6 +90,11 @@ def process_frame(frame):
 
 if __name__ == "__main__":
 
+    parser = argparse.ArgumentParser(description="Predict age, gender, and ethnicity from an video.")
+    parser.add_argument('--vid_path', type=str, help='Path to the image file.', required=True)
+    args = parser.parse_args()
+
+
     physical_devices = tf.config.list_physical_devices('GPU')
     if len(physical_devices) > 0:
         tf.config.experimental.set_memory_growth(physical_devices[0], True)
@@ -93,7 +104,7 @@ if __name__ == "__main__":
     face_detector = MTCNN(device = "GPU:0")
 
     #load test iamge
-    video_capture = cv2.VideoCapture('./images/test_video.mp4')  # Use 0 for webcam
+    video_capture = cv2.VideoCapture(args.vid_path)  # Use 0 for webcam
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         while video_capture.isOpened():
