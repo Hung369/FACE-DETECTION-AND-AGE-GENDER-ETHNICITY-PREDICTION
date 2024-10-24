@@ -41,21 +41,21 @@ Before running inference script, you have to running training script or download
 After setting up all the steps use bellow command to run the program
 * Showing data distribution and characteristics, run this script:
 ```bash
-  python3 survey_dataset.py
+python3 survey_dataset.py
 ```
 
 * Want to run the training model process, run this script: 
 ```bash
-    python3 training_model.py
+python3 training_model.py
 ```
 * Running model inference on image via this script:
 ```bash
-    python3 inference_image.py
+python3 inference_image.py
 ```
 
 * Running model inference on video via this script:
 ```bash
-    python3 inference_video.py
+python3 inference_video.py
 ```
 
 
