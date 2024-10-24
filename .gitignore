@@ -1,0 +1,23 @@
+# Environments
+.venv
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+
+# Distribution / packaging
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Dataset and model
+/data/*.csv
+/model/checkpoints/*.h5
